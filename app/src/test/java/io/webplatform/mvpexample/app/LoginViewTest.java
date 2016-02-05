@@ -30,6 +30,7 @@ public class LoginViewTest {
 
     private LoginView loginView;
     private Activity currentActivity;
+    private ProgressBar mProgressBar;
 
     @Before
     public void setUp() {
@@ -64,5 +65,16 @@ public class LoginViewTest {
     //  - You first hide the progress bar
     //  - You show the progress bar
     //  - You verify the value returned by getVisibility()
+    @Test
+    public void testProgressIndicatorIsVisible(){
+
+        mProgressBar = (ProgressBar) currentActivity.findViewById(R.id.progress);
+
+        loginView.hideProgress();
+        loginView.showProgress();
+
+        assertTrue("checking progress bar is visible", mProgressBar.getVisibility() == View.VISIBLE);
+
+    }
 
 }
