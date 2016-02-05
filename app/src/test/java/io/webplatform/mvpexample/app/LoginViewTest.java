@@ -4,20 +4,17 @@ import android.app.Activity;
 import android.os.Build;
 import android.widget.ProgressBar;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.annotation.Config;
 
 import io.webplatform.mvpexample.app.login.LoginActivity;
 import io.webplatform.mvpexample.app.login.LoginView;
+
+import static junit.framework.Assert.assertNotNull;
 
 /**
  * Created by Giorgio_Natili on 1/28/16.
@@ -41,7 +38,8 @@ public class LoginViewTest {
     public void testProgressIndicatorIsHidden() {
 
 
-        final ProgressBar progressBar = (ProgressBar) ((Activity) loginView.fin(R.id.progress));
+        final Activity activity = (Activity) loginView;
+        final ProgressBar progressBar = (ProgressBar) activity.findViewById(R.id.progress);
 
         assertNotNull("checking that the progress bar exists", progressBar);
 //
