@@ -33,6 +33,13 @@
         android:text="@string/log_in"
         android:drawableRight="@mipmap/ic_action_accept"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/forgot_password"
+        android:layout_gravity="center_horizontal" />
+
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="wrap_content"

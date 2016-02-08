@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
@@ -18,16 +19,22 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
     private ProgressBar progressBar;
     private EditText username;
     private EditText password;
+    private Button   recoverPassword;
     private LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
 
         progressBar = (ProgressBar) findViewById(R.id.progress);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+
+        recoverPassword = (Button) findViewById(R.id.forgot_password);
+        recoverPassword.setText(getString(R.string.recover_password));
+
         findViewById(R.id.button).setOnClickListener(this);
 
         presenter = new LoginPresenterImpl(this);
