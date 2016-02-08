@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
@@ -33,6 +34,7 @@ public class LoginViewTest {
     private LoginView loginView;
     private Activity currentActivity;
     private ProgressBar mProgressBar;
+    private CheckBox mCheckBox;
 
     @Before
     public void setUp() {
@@ -41,6 +43,7 @@ public class LoginViewTest {
         currentActivity = (Activity) loginView;
 
         mProgressBar = (ProgressBar) currentActivity.findViewById(R.id.progress);
+        mCheckBox = (CheckBox) currentActivity.findViewById(R.id.store_credentials);
 
     }
 
@@ -104,12 +107,22 @@ public class LoginViewTest {
 
     @Test
     public void testRecoverPasswordLabel() {
-
         final Button recoverPassword = (Button) currentActivity.findViewById(R.id.forgot_password);
 
         final String recoverLabel = recoverPassword.getText().toString();
         assertTrue("checking the recover password label is equal to R.string.recover_password", recoverLabel.equals("Recover Password"));
 
+    }
+
+    @Test
+    public void testCheckboxExists(){
+
+        assertNotNull("checking that check box exists", mCheckBox);
+    }
+
+    @Test
+    public void testCheckboxHasLabel(){
+        assertTrue("checking that check box has a label", mCheckBox.getText().toString().equals("Store Credentials"));
     }
 
 }
