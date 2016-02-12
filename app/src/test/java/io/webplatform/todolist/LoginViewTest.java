@@ -5,6 +5,7 @@ package io.webplatform.todolist;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.view.View;
 import android.widget.Button;
@@ -18,11 +19,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-
+import org.robolectric.shadows.ShadowActivity;
 
 import io.webplatform.todolist.login.LoginActivity;
 import io.webplatform.todolist.login.LoginView;
+import io.webplatform.todolist.main.MainActivity;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -123,6 +126,20 @@ public class LoginViewTest {
     @Test
     public void testCheckboxHasLabel(){
         assertTrue("checking that check box has a label", mCheckBox.getText().toString().equals("Store Credentials"));
+    }
+
+    @Test
+    public void testNavigateHome() {
+
+        Intent expectedIntent = new Intent(currentActivity, MainActivity.class);
+
+        loginView.navigateToHome();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(currentActivity);
+        Intent actualIntent = shadowActivity.getNextStartedActivity();
+
+        assertTrue("MainActivity getting launched when the user autenticate", expectedIntent.equals(actualIntent));
+
     }
 
 }
