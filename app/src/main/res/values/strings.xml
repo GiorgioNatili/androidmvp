@@ -8,7 +8,7 @@
     <string name="password">password</string>
     <string name="log_in">Log in</string>
     <string name="title_activity_main">MVP Example</string>
-    <string name="username_error">Username cannot be empty</string>
+    <string name="username_error">Please fill the username field!</string>
     <string name="password_error">Password cannot be empty</string>
     <string name="recover_password">Recover Password</string>
     <string name="store_credentials">Store Credentials</string>

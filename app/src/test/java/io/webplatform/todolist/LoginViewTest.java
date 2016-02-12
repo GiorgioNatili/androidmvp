@@ -6,6 +6,7 @@ package io.webplatform.todolist;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.Context;
 import android.os.Build;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,14 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+<<<<<<< HEAD
 import org.robolectric.shadows.ShadowActivity;
+=======
+import org.robolectric.internal.ShadowExtractor;
+import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowContext;
+
+>>>>>>> e24b5d6907bef6c2822582e18931d088d9bebb69
 
 import io.webplatform.todolist.login.LoginActivity;
 import io.webplatform.todolist.login.LoginView;
@@ -37,6 +45,7 @@ public class LoginViewTest {
     private LoginView loginView;
     private Activity currentActivity;
     private ProgressBar mProgressBar;
+    private ShadowContext shadowContext;
     private CheckBox mCheckBox;
 
     @Before
@@ -47,6 +56,9 @@ public class LoginViewTest {
 
         mProgressBar = (ProgressBar) currentActivity.findViewById(R.id.progress);
         mCheckBox = (CheckBox) currentActivity.findViewById(R.id.store_credentials);
+
+        Context context =  ShadowApplication.getInstance().getApplicationContext();
+        shadowContext = (ShadowContext) ShadowExtractor.extract(context);
 
     }
 
@@ -93,10 +105,11 @@ public class LoginViewTest {
 
         loginView.setUsernameError();
 
-        assertTrue("checking the error message exists", username.getError().toString().length() > 0);
+        final String displayedErrorMessage = username.getError().toString();
+        final String currentErrorMessage = shadowContext.getString(R.string.username_error);
 
-        final String errorMessage = username.getError().toString();
-        assertTrue("checking the error message is R.string.username_error", errorMessage.equals("Username cannot be empty"));
+        assertTrue("checking the error message exists", displayedErrorMessage.length() > 0);
+        assertTrue("Checking the message is correct", displayedErrorMessage.equals(currentErrorMessage));
 
     }
 
@@ -113,7 +126,9 @@ public class LoginViewTest {
         final Button recoverPassword = (Button) currentActivity.findViewById(R.id.forgot_password);
 
         final String recoverLabel = recoverPassword.getText().toString();
-        assertTrue("checking the recover password label is equal to R.string.recover_password", recoverLabel.equals("Recover Password"));
+        final String configuredRecoverLabel = shadowContext.getString(R.string.recover_password);
+
+        assertTrue("checking recover password label correctly assigned", recoverLabel.equals(configuredRecoverLabel));
 
     }
 
