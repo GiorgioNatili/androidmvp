@@ -11,5 +11,6 @@
     <string name="username_error">Please fill the username field!</string>
     <string name="password_error">Password cannot be empty</string>
     <string name="recover_password">Recover Password</string>
+    <string name="store_credentials">Store Credentials</string>
 
 </resources>
