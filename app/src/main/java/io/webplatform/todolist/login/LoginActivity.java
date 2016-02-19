@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 
 
 import io.webplatform.todolist.R;
+import io.webplatform.todolist.forgotpassword.ForgotPasswordActivity;
 import io.webplatform.todolist.main.MainActivity;
 /**
  * Created by Giorgio_Natili on 1/28/16.
@@ -61,12 +62,23 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
         password.setError(getString(R.string.password_error));
     }
 
-    @Override public void navigateToHome() {
+    @Override public void navigateToHome(){
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 
     @Override public void onClick(View v) {
         presenter.validateCredentials(username.getText().toString(), password.getText().toString());
+    }
+
+    @Override public void showForgotPassword(){
+
+        // TODO: Finalize the test for the `showForgotPassword` method
+
+        // TODO: write a test for the method to dismiss the activity
+        // TODO: Implement the method to dismiss the activity
+
+        startActivity(new Intent(this, ForgotPasswordActivity.class));
+        finish();
     }
 }

@@ -5,8 +5,8 @@ package io.webplatform.todolist;
  */
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.View;
 import android.widget.Button;
@@ -22,15 +22,12 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-<<<<<<< HEAD
-import org.robolectric.shadows.ShadowActivity;
-=======
 import org.robolectric.internal.ShadowExtractor;
+import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowContext;
 
->>>>>>> e24b5d6907bef6c2822582e18931d088d9bebb69
-
+import io.webplatform.todolist.forgotpassword.ForgotPasswordActivity;
 import io.webplatform.todolist.login.LoginActivity;
 import io.webplatform.todolist.login.LoginView;
 import io.webplatform.todolist.main.MainActivity;
@@ -155,6 +152,15 @@ public class LoginViewTest {
 
         assertTrue("MainActivity getting launched when the user autenticate", expectedIntent.equals(actualIntent));
 
+    }
+    @Test
+    public void testForgotPasswordButton(){
+        ForgotPasswordActivity forgotPasswordActivity = Robolectric.setupActivity(ForgotPasswordActivity.class);
+        forgotPasswordActivity.findViewById(R.id.forgot_password).performClick();
+        Intent expectedIntent = new Intent (forgotPasswordActivity, ForgotPasswordActivity.class);
+        assertTrue(Shadows.shadowOf(forgotPasswordActivity).getNextStartedActivity().equals(expectedIntent));
+
+       // assertEquals("Clicking on button launches forgot password activity", );
     }
 
 }

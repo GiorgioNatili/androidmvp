@@ -10,15 +10,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.httpclient.FakeHttp;
+import org.robolectric.shadows.httpclient.FakeHttpLayer;
 
 import io.webplatform.todolist.login.LoginInteractor;
 import io.webplatform.todolist.login.LoginInteractorImpl;
 
 import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricGradleTestRunner.class)
@@ -52,4 +52,14 @@ public class LoginInteractorTest {
 
     }
 
+    @Test
+    public void testAuthentication() {
+
+        FakeHttp.getFakeHttpLayer().interceptHttpRequests(false);
+        FakeHttp.setDefaultHttpResponse(200, "OK");
+        FakeHttpLayer fakeHttpLayer = FakeHttp.getFakeHttpLayer();
+
+//    }
+
+    }
 }
